@@ -1,0 +1,15 @@
+class Text:
+    def __init__(self, name=None, enemy_name=None, weapon_name=None, damage=None):
+        self.Start = "Du står mitt i en gladiatorarena, omgiven av en jublande publik. Solens strålar reflekteras på din rustning, och dammet virvlar runt dina fötter. Du känner publikens förväntan och adrenalinet pumpar genom dina ådror."
+        self.End = "Du har klarat av alla utmaningar och vunnit gladiatorspelen. Publiken jublar och kastar blommor och mynt. Du är en hjälte, en legend. Du har överlevt."
+        self.Lose = "Du har fallit i striden. Publiken skriker och buar. Du har förlorat."
+        self.Welcome = f"Välkommen till gladiatorspelen, {name}! Du är en modig krigare som har blivit tillfångatagen och tvingas slåss för ditt liv. Du måste överleva alla utmaningar för att vinna friheten. Lycka till!"
+        self.BattleBegins = "En annan gladiator hoppar in i arenan, redo att möta dig i strid. Publiken håller andan i spänning."
+        self.Choose = "Välj vad du ska göra härnäst: "
+        self.ChooseFight = "Välj en motståndare att slåss mot: "
+        self.ChooseWeapon = "Välj ett vapen att använda: "
+        self.ChooseAction = f"Du står öga mot öga med {enemy_name}. Vad vill du göra?"
+        self.Attack = f"Du attackerar {enemy_name} med {weapon_name} och gör {damage} skada!"
+        self.Defend = f"Du försvarar dig mot {enemy_name}!"
+        self.RunSuccess = "Du lyckades fly från striden och överlevde, för nu."
+        self.RunFail = f"Du försökte fly från striden men {enemy_name} fångade dig och slog dig till marken."
