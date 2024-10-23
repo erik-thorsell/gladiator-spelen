@@ -3,40 +3,41 @@ import random
 import os
 import time
 
-def choices(self, enemy):
+def choices() -> list:
     result = []
-    result.append(("Attack", attack(self, enemy)))
-    result.append(("Run", run(self, enemy)))
+    result.append(("Attack", attack))
+    result.append(("Run", run))
     return result
 
-def run(self, enemy):
-    text = Text(enemy_name=enemy.name)
-    if random.randint(0, 1) == 0:
+def run(self, enemy) -> bool:
+    potential_damage = random.randint(1, 8)
+    potential_health = random.randint(1, 10)
+    text = Text(self, enemy, potential_damage=potential_damage, potential_health=potential_health)
+    if random.randint(0, 1) == 0 and potential_health + self.health < 100:
         print(text.RunSuccess)
-        self.health += 10
-        print(f"Du lyckades fly från {enemy.name} och lyckades återhämta dig med 10 hälsa. Du har nu {self.health} hälsa.")
+        self.health += potential_health
         return True
     else:
         print(text.RunFail)
-        self.health -= 5
-        print(f"{enemy.name} gjorde 5 skada på dig. Du har {self.health} hälsa kvar.")
+        self.health -= potential_damage
         return False
 
-def choose_action(self, enemy):
+def choose_action(self, enemy, prechosen: str = None):
     os.system("cls")
-    text = Text(self.name, enemy.name)
+    text = Text(self, enemy)
     print(text.ChooseAction)
-    for index, (action, func) in enumerate(choices(self, enemy)):
+    for index, (action, func) in enumerate(choices()):
         print(f"{index + 1}. {action}")
-    choice = int(input("Välj ett alternativ: "))
-    if not 1 <= choice <= len(choices(self, enemy)):
-        print("Ogiltigt val. Försök igen.")
+    print(text.ListStats)
+
+    choice = prechosen or input(text.ChooseOption)
+    if not choice.isdigit() or not 1 <= int(choice) <= len(choices()):
+        print(text.WrongError)
         time.sleep(3)
         return choose_action(self, enemy)
-    return choices(self, enemy)[choice - 1][1]
+    return choices()[int(choice) - 1][1](self, enemy)
 
 def attack(self, enemy):
-    text = Text(weapon_name=self.weapon.name, enemy_name=enemy.name, damage=self.weapon.attack)
-    print(text.Attack)
+    text = Text(self, enemy)
     enemy.health -= self.weapon.attack
-    print(f"{enemy.name} har {enemy.health} hälsa kvar.")
+    print(text.Attack)

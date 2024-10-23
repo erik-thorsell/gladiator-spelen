@@ -12,12 +12,26 @@ def sleep(num):
 player = Player()
 enemy = Player()
 os.system("cls")
-text = Text(player.name)
+text = Text(player, enemy)
 print(text.Start)
 sleep(3)
 print(text.Welcome)
 sleep(5)
 print(text.BattleBegins)
 sleep(2)
-choose_action(player, enemy)
+print("")
+input("Tryck på enter för att fortsätta...")
+turn = True
+while player.health > 0 and enemy.health > 0:
+    if turn == True:
+        choose_action(player, enemy)
+    else:
+        choose_action(enemy, player, "1")
+    input("Tryck på enter för att fortsätta...")
+    turn = not turn
+
+if player.health > 0:
+    print(text.End)
+else:
+    print(text.Lose)
 
