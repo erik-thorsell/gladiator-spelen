@@ -5,7 +5,7 @@ from random import randint, choice
 from time import sleep
 from os import _exit
 
-def enemy_attack(self, player):
+def enemy_attack(self, player) -> None:
     damage = self.inventory["weapon"].attack
     text = Text(player, self, potential_damage=damage)
     if player.protected:
@@ -14,8 +14,13 @@ def enemy_attack(self, player):
     print(text.enemy_attacks)
 
 def attack(self, enemy):
-    text = Text(self, enemy)
-    enemy.health -= self.inventory["weapon"].attack
+    damage = self.inventory["weapon"].attack
+    if enemy.protected:
+        damage /= 2
+    if self.skilled:
+        damage *= 1.5
+    text = Text(self, enemy, potential_damage=damage)
+    enemy.health -= damage
     print(text.attack)
 
 def run(self, enemy) -> bool:
@@ -31,10 +36,11 @@ def run(self, enemy) -> bool:
         self.health -= potential_damage
         return False
     
-def steal_weapon(self, enemy) -> None:
+def steal_weapon(enemy, self) -> None:
     text = Text(self, enemy)
     self.inventory["weapon"] = enemy.inventory["weapon"]
     enemy.inventory["weapon"] = weapons["hands"]
+    enemy.skilled = False
     print(text.steal_weapon)
 
 def open_box(self, enemy) -> None:
@@ -46,7 +52,12 @@ def open_box(self, enemy) -> None:
         print(text.found_shield)
     else:
         self.inventory["weapon"] = new_weapon
+        text = Text(self, enemy)
         print(text.found_weapon)
+        if randint(0, 1) == 1:
+            print(text.skilled)
+            self.skilled = True
+        
 
 def enemy_open_box(self, player) -> None:
     text = Text(player, self)
@@ -58,6 +69,9 @@ def enemy_open_box(self, player) -> None:
     else:
         self.inventory["weapon"] = new_weapon
         print(text.enemy_found_weapon)
+        if randint(0, 1) == 1:
+            print(text.enemy_skilled)
+            self.skilled = True
 
 def defend(self, enemy) -> None:
     text = Text(self, enemy)
@@ -83,9 +97,9 @@ def choices(player, enemy) -> list:
     result.append(("Spring", run))
     if player.inventory["shield"]:
         result.append(("Försvara", defend))
-    if randint(0, 3) == 1 and not player.inventory["shield"]:
+    if randint(0, 3) == 1:
         result.append(("Öppna låda", open_box))
-    if randint(0, 5) == 1 and enemy.inventory["weapon"] != weapons["hands"]:
+    if randint(0, 5) == 1 and enemy.inventory["weapon"].name != weapons["hands"].name:
         result.append(("Stjäl vapen", steal_weapon))
     result.append(("Ge upp", give_up))
     return result
