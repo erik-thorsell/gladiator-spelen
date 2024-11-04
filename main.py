@@ -1,46 +1,46 @@
 from modules.entities import Player
 from modules.text import Text
-from modules.fight import choose_action
-import time
-import os
-import math
+from modules.fight import choose_action, enemy_attack
+from time import time, sleep
+from os import system
+from math import floor
 
-dev_mode = 0
-
-def sleep(num):
-    time.sleep(num * dev_mode)
-
-start = time.time()
+start = time()
 time_limit = 300
 
+system("cls")
 player = Player()
 enemy = Player()
-os.system("cls")
+
 text = Text(player, enemy)
-print(text.Start)
-sleep(3)
-print(text.Welcome)
-sleep(5)
-print(text.BattleBegins)
-sleep(2)
+print(text.start)
+# sleep(3)
+print(text.welcome)
+# sleep(5)
+print(text.battle_begins)
 print("")
-input("Tryck på enter för att fortsätta...")
-turn = True
+# sleep(2)
+input(text.enter)
+players_turn = True
 while player.health > 0 and enemy.health > 0:
-    if turn == True:
+    system("cls")
+    if players_turn == True:
         choose_action(player, enemy)
     else:
-        choose_action(enemy, player, "1")
-    asd = time.time() - start
-    if asd > time_limit:
-        print("Tiden har gått ut. Striden slutar oavgjort.")
+        enemy_attack(enemy, player)
+
+    delta = time() - start
+    if delta > time_limit:
+        print(text.draw)
         break
-    print(f"{math.floor(time_limit - asd)} sekunder återstår av striden.")
-    input("Tryck på enter för att fortsätta...")
-    turn = not turn
+
+    new_text = Text(player, enemy, 0, 0, floor(time_limit - delta))
+    print(new_text.time_remaining)
+    input(text.enter)
+    players_turn = not players_turn
 
 if player.health > 0:
-    print(text.End)
+    print(text.win)
 else:
-    print(text.Lose)
+    print(text.lose)
 

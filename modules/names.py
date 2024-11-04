@@ -1,8 +1,8 @@
-import random
+from random import choice
 
 def generate_name():
-    first_name = random.choice(list(first_names))
-    last_name = random.choice(list(last_names))
+    first_name = choice(list(first_names))
+    last_name = choice(list(last_names))
     return f"{first_name} {last_name}"
 
 first_names = {

@@ -6,10 +6,10 @@ class Weapon:
 
 
 weapons = {
-    "sword": Weapon(10, 5, "Sword"),
-    "axe": Weapon(15, 3, "Axe"),
-    "spear": Weapon(12, 4, "Spear"),
-    "bow": Weapon(8, 6, "Bow"),
-    "dagger": Weapon(7, 7, "Dagger"),
-    "hands": Weapon(4, 8, "Hands")
+    "sword": Weapon(10, 5, "svärd"),
+    "axe": Weapon(15, 3, "yxa"),
+    "spear": Weapon(12, 4, "spjut"),
+    "bow": Weapon(8, 6, "båge"),
+    "dagger": Weapon(7, 7, "kniv"),
+    "hands": Weapon(4, 8, "händer")
 }
