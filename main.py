@@ -1,12 +1,13 @@
 from modules.entities import Player
 from modules.text import Text
 from modules.fight import choose_action, enemy_attack
+from modules.events import decide_winner
 from time import time, sleep
 from os import system
 from math import floor
 
 start = time()
-time_limit = 300
+time_limit = 10
 
 system("cls")
 player = Player()
@@ -31,7 +32,6 @@ while player.health > 0 and enemy.health > 0:
 
     delta = time() - start
     if delta > time_limit:
-        print(text.draw)
         break
 
     new_text = Text(player, enemy, 0, 0, floor(time_limit - delta))
@@ -39,8 +39,11 @@ while player.health > 0 and enemy.health > 0:
     input(text.enter)
     players_turn = not players_turn
 
-if player.health > 0:
+system("cls") 
+if delta > time_limit:
+    print(decide_winner(player, enemy))
+elif player.health > 0:
     print(text.win)
 else:
-    print(text.lose)
+    print(text.loss)
 

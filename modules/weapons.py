@@ -11,5 +11,6 @@ weapons = {
     "spear": Weapon(12, 4, "spjut"),
     "bow": Weapon(8, 6, "båge"),
     "dagger": Weapon(7, 7, "kniv"),
-    "hands": Weapon(4, 8, "händer")
+    "hands": Weapon(4, 8, "händer"),
+    "claws": Weapon(6, 9, "klor"),
 }
