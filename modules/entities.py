@@ -12,7 +12,7 @@ def Entity(is_an_animal = False):
 class Player:
     def __init__(self):
         self.name = generate_name()
-        self.health = 50
+        self.health = 100
         self.inventory = copy.deepcopy(default_inventory)
         self.protected = False
         self.skilled = False
@@ -23,7 +23,7 @@ class Player:
 class Animal:
     def __init__(self):
         self.name = "Tiger"
-        self.health = 65
+        self.health = 150
         self.inventory = default_inventory
         self.inventory["weapon"] = weapons["claws"]
     

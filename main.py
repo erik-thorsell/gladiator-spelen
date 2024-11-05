@@ -3,7 +3,7 @@ from modules.text import Text
 from modules.fight import choose_action, enemy_attack
 from modules.events import decide_winner
 from modules.utils import clear_screen
-from time import time
+from time import time, sleep
 from random import randint
 from math import floor
 

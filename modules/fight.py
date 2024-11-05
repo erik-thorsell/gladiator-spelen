@@ -10,6 +10,8 @@ def enemy_attack(self, player) -> None:
     text = Text(player, self, potential_damage=damage)
     if player.protected:
         damage /= 2
+        if randint(0, 2) == 1:
+            player.protected = False
     player.health -= damage
     print(text.enemy_attacks)
 
@@ -17,8 +19,10 @@ def attack(self, enemy):
     damage = self.inventory["weapon"].attack
     if enemy.protected:
         damage /= 2
+        if randint(0, 2) == 1:
+            enemy.protected = False
     if self.skilled:
-        damage *= 1.5
+        damage *= 1.25
     text = Text(self, enemy, potential_damage=damage)
     enemy.health -= damage
     print(text.attack)
@@ -46,6 +50,7 @@ def steal_weapon(enemy, self) -> None:
 def open_box(self, enemy) -> None:
     text = Text(self, enemy)
     print(text.open_box)
+    sleep(1)
     new_weapon = choice(list(weapons.values()))
     if new_weapon == "a shield.":
         self.inventory["shield"] = True
@@ -54,6 +59,7 @@ def open_box(self, enemy) -> None:
         self.inventory["weapon"] = new_weapon
         text = Text(self, enemy)
         print(text.found_weapon)
+        sleep(1)
         if randint(0, 1) == 1:
             print(text.skilled)
             self.skilled = True
