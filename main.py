@@ -16,12 +16,12 @@ enemy = Entity()
 
 text = Text(player, enemy)
 print(text.start)
-# sleep(3)
+sleep(3)
 print(text.welcome)
-# sleep(5)
+sleep(5)
 print(text.battle_begins)
 print("")
-# sleep(2)
+sleep(2)
 input(text.enter)
 players_turn = True
 while player.health > 0 and enemy.health > 0:

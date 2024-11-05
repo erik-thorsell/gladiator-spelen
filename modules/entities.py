@@ -26,6 +26,7 @@ class Animal:
         self.health = 150
         self.inventory = default_inventory
         self.inventory["weapon"] = weapons["claws"]
+        self.protected = False
     
     def is_an_animal(self) -> bool:
         return True

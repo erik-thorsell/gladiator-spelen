@@ -114,7 +114,7 @@ def choose_action(self, enemy) -> None:
     text = Text(self, enemy)
     print(text.choose_action)
     available_choices = choices(self, enemy)
-    for index, (action, func) in enumerate(available_choices):
+    for index, (action, _) in enumerate(available_choices):
         print(f"{index + 1}. {action}")
     print("")
     print(text.list_stats)
