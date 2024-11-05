@@ -8,6 +8,7 @@ def generate_name():
 first_names = {
     "Aurelius",
     "Brutus",
+    "Bartholomew",
     "Cassius",
     "Decimus",
     "Emilianus",
