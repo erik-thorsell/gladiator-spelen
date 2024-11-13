@@ -7,18 +7,17 @@ default_inventory = {
     "shield": False
     }
 
-def Entity(is_an_animal = False):
+def Entity(is_an_animal = False): # skapar en spelare eller ett djur beroende på om is_an_animal är True eller False
     return Animal() if is_an_animal else Player()
 class Player:
     def __init__(self):
-        self.name = generate_name()
+        self.name = generate_name() # skapar ett slumpmässigt namn, används bara för motståndaren
         self.health = 100
-        self.inventory = copy.deepcopy(default_inventory)
-        self.protected = False
-        self.skilled = False
-    
-    def is_an_animal(self) -> bool:
-        return False
+        self.inventory = copy.deepcopy(default_inventory) # kopierar default_inventory för att undvika att alla spelare delar samma inventory
+        self.protected = False # används för skölden
+        self.skilled = False # ger spelaren extra skada i strid med ett visst vapen
+        self.gender = "Male"
+        self.priorityNext = False # ger spelaren prioritet att agera först i nästa runda
 
 class Animal:
     def __init__(self):
@@ -27,6 +26,3 @@ class Animal:
         self.inventory = default_inventory
         self.inventory["weapon"] = weapons["claws"]
         self.protected = False
-    
-    def is_an_animal(self) -> bool:
-        return True

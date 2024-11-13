@@ -1,6 +1,6 @@
 from random import choice
 
-def generate_name():
+def generate_name(): # skapar ett slumpmässigt namn
     first_name = choice(list(first_names))
     last_name = choice(list(last_names))
     return f"{first_name} {last_name}"
