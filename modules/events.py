@@ -10,7 +10,7 @@ def decide_winner(player, enemy) -> str:
     emperor = randint(0, 1) # 50% chans att kejsaren är närvarande
     if emperor == 0: # kejsaren är inte närvarande!
         if player.health > enemy.health: #om spelaren har mer hälsa, får hen vinna.
-            return text.win
+            return f"{text.win}\n{text.strongest}"
         elif player.health < enemy.health: #om hen däremot har mindre, låt hen förlora
             return text.loss
         else: 
@@ -20,7 +20,7 @@ def decide_winner(player, enemy) -> str:
         sleep(3)
         #samma grej här fast texten byts ut
         if player.health > enemy.health:
-            return text.win_emperor
+            return f"{text.win_emperor}\n{text.strongest}"
         elif player.health < enemy.health:
             return text.loss_emperor
         else:

@@ -26,3 +26,6 @@ class Animal:
         self.inventory = default_inventory
         self.inventory["weapon"] = weapons["claws"]
         self.protected = False
+        self.skilled = False
+        self.gender = "djuret"
+        self.priorityNext = False

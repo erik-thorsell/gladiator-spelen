@@ -2,7 +2,7 @@
 # riktigt smidigt faktiskt
 
 class Text:
-    def __init__(self, player, enemy, potential_damage=0, potential_health=0, time=None):
+    def __init__(self, player, enemy, potential_damage=0, potential_health=0, time=None, weapon=None):
         self.start = "Du står mitt i en gladiatorarena, omgiven av en jublande publik. \nSolens strålar reflekteras på din rustning, och dammet virvlar runt dina fötter. \nDu känner publikens förväntan och adrenalinet pumpar genom dina ådror."
         self.welcome = f"Välkommen till gladiatorspelen, {player.name}! \nDu är en modig krigare som har blivit tillfångatagen och tvingas slåss för ditt liv. \nDu måste överleva alla utmaningar för att vinna friheten. Lycka till!"
         self.battle_begins = "En annan gladiator hoppar in i arenan, redo att möta dig i strid. Publiken håller andan i spänning."
@@ -24,7 +24,7 @@ class Text:
         self.steal_weapon = f"Du stal {enemy.name}s {enemy.inventory["weapon"].name} och slängde iväg {player.inventory["weapon"].name}."
         self.open_box = "Du hittade en låda på marken och öppnade den, publiken spänner sig i förväntan."
         self.enemy_open_box = f"{enemy.name} hittade en låda på marken och öppnade den."
-        self.found_weapon = f"Du hittade ett nytt vapen i lådan och bytte ut ditt gamla mot {player.inventory["weapon"].name} ({player.inventory["weapon"].attack} skada)."
+        self.found_weapon = f"Du hittade ett nytt vapen i lådan och har chansen att byta ut ditt gamla mot {"" if weapon == None else weapon.name} ({"" if weapon == None else weapon.attack} skada)."
         self.skilled = "Du känner dig skickligare och mer fokuserad än någonsin med ditt nya vapen. Du gör nu extra skada i strid."
         self.found_shield = "Du hittade en sköld i lådan och tog upp den."
         self.enemy_found_weapon = f"{enemy.name} hittade ett nytt vapen i lådan och bytte ut sitt gamla mot {enemy.inventory["weapon"].name} ({enemy.inventory["weapon"].attack} skada)."
@@ -43,14 +43,15 @@ class Text:
         self.time_remaining = f"Tid kvar: {time}"
         self.time_is_out = "Tiden har gått ut. Publiken får nu rösta på vem som ska vinna!"
         self.emperor = "Det verkar som att kejsaren är närvarande! Han reser sig från sin tron och du väntar förväntansfullt på hans beslut."
-        self.win = "Du har klarat av alla utmaningar och vunnit gladiatorspelen. Publiken jublar och kastar blommor och mynt. Du är en hjälte, en legend. Du har överlevt."
+        self.strongest = f"Du är den starkaste {player.gender} i arenan! Publiken jublar och kastar blommor och mynt. Du är en hjälte, en legend. Du har överlevt."
+        self.win = "Du har klarat av alla utmaningar och vunnit gladiatorspelen."
         self.loss = "Du har fallit i striden. Publiken skriker och buar. Du har förlorat."
         self.draw = "Det är en oavgjord match. Publiken är besviken och du är utmattad."
         self.draw_emperor = "Kejsaren har bestämt att det är en oavgjord match. Publiken är besviken och du är utmattad."
-        self.win_emperor = "Kejsaren har bestämt att du är vinnaren! Publiken jublar och kastar blommor och mynt. Du är en hjälte, en legend. Du har överlevt."
+        self.win_emperor = "Kejsaren har bestämt att du är vinnaren!"
         self.loss_emperor = "Kejsaren har bestämt att du har förlorat. Publiken skriker och buar. Du har fallit i striden."
         self.give_up = "Du ger upp och faller till marken. Du har förlorat."
         self.wrong_error = "Ogiltigt val. Försök igen."
         self.oops = "Oops! Något gick fel. För att åtgärda har kejsaren bestämt att du ska få göra ditt val igen. Lycka till!"
         self.choose_option = "Välj ett alternativ: "
-        self.enter = "Tryck på enter för att fortsätta.."
+        self.enter = "Tryck på enter för att fortsätta..."

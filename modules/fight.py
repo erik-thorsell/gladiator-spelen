@@ -112,22 +112,34 @@ def open_box(self, enemy) -> None:
         print(text.found_shield)
 
     else: # annars hittar spelaren ett nytt vapen
-        self.inventory["weapon"] = new_weapon
-        text = Text(self, enemy)
+        text = Text(self, enemy, weapon=new_weapon)
         print(text.found_weapon)
         sleep(1)
 
+        skilled = False
         # 50% chans att spelaren blir skicklig med sitt nya vapen
         if randint(0, 1) == 1: 
             print(text.skilled)
-            self.skilled = True
+            skilled = True
+        
+        #låt spelaren välja om hen vill ta upp vapnet eller inte
+        answer = ""
+        while True:
+            answer = input("Vill du ta upp vapnet? (ja/nej) ").lower()
+            if answer == "ja":
+                self.inventory["weapon"] = new_weapon
+                print(f"Du tog upp {new_weapon.name}.")
+                self.skilled = skilled
+            elif answer == "nej":
+                print("Du lämnade vapnet kvar.")
+            if answer == "ja" or answer == "nej":
+                break
         
 
 #ÖPPNA LÅDA FÖR MOTSTÅNDAREN
 def enemy_open_box(self, player) -> None:
     text = Text(player, self)
     print(text.enemy_open_box)
-    sleep(1)
 
     new_weapon = get_random_weapon(self.inventory["weapon"]) # slumpa ett nytt vapen, tar bort vissa vapen som inte ska kunna hittas
     if new_weapon == "a shield.":
@@ -139,7 +151,6 @@ def enemy_open_box(self, player) -> None:
         self.inventory["weapon"] = new_weapon
         text = Text(player, self)
         print(text.enemy_found_weapon)
-        sleep(1)
 
         # 50% chans att motståndaren blir skicklig med sitt nya vapen
         if randint(0, 1) == 1:
@@ -204,7 +215,7 @@ def choose_action(self, enemy) -> None:
     choice = input(text.choose_option) # läs spelarinput
     if not choice.isdigit() or not 1 <= int(choice) <= len(available_choices): # om valet inte är en siffra eller inte finns i listan, skriv ut felmeddelande och försök igen
         print(text.wrong_error)
-        sleep(3)
+        sleep(.5)
         clear_screen()
         return choose_action(self, enemy)
     clear_screen()
